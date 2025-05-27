@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "autototemhange",
+  "version": "${version}",
+  "name": "AutoTotemСhange",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/autototemhange/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.eirmax.fabric.AutoTotemFabric"
+    ],
+    "client": [
+      "com.eirmax.fabric.client.ExampleModFabricClient"
+    ]
+  },
+  "mixins": [
+    "autototemhange.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
