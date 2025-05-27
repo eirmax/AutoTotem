@@ -143,7 +143,6 @@ public class TotemFinderUtil {
             return;
         }
 
-        // Находим лучший доступный тотем в инвентаре (слоты 1-8, 9-35)
         int totemSlot = getBestTotemSlot(client);
 
         if (totemSlot != -1) {

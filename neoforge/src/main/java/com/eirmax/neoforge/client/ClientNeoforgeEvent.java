@@ -17,7 +17,7 @@ public class ClientNeoforgeEvent {
         for (Lazy<KeyMapping> key : ClientNeoforgeKeybindEvent.keyMappings) {
             while (Minecraft.getInstance().player != null && key.get().consumeClick()) {
                 if (key.get().getName().equals("key.elytraswapplus.swap")) {
-                    TotemFinderUtil.tryEquipTotemItemOffhand(Minecraft.getInstance());
+                    TotemFinderUtil.performManualTotemSwap(Minecraft.getInstance());
                 }
                 if (key.get().getName().equals("key.elytraswapplus.auto_swap")) {
                     TotemFinderUtil.toggleAutoEquip();

@@ -17,7 +17,7 @@ public class ClientFabricKeybindEvent {
             for (KeyMapping key : keyMappings) {
                 while (client.player != null && key.consumeClick()) {
                     if (key.getName().equals("key.elytraswapplus.swap")) {
-                        TotemFinderUtil.tryEquipTotemItemOffhand(Minecraft.getInstance());
+                        TotemFinderUtil.performManualTotemSwap(Minecraft.getInstance());
                     }
                     if (key.getName().equals("key.elytraswapplus.auto_swap")) {
                         TotemFinderUtil.toggleAutoEquip();
