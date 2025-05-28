@@ -18,14 +18,17 @@ modId = "neoforge"
 type = "required"
 versionRange = "[21.1,)"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"
 
 [[dependencies.autototemhange]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21.1,)"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"
 
 [[mixins]]
 config = "autototemhange.mixins.json"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
