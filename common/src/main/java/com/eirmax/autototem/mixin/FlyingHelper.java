@@ -19,7 +19,7 @@ public class FlyingHelper {
 
             Minecraft client = Minecraft.getInstance();
             if (TotemFinderUtil.auto_equip) {
-                TotemFinderUtil.tryEquipTotemInMainHand(client);
+                TotemFinderUtil.performManualOffhandSwap(client);
 
         }
     }
