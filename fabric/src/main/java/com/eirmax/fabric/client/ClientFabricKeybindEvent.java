@@ -17,11 +17,10 @@ public class ClientFabricKeybindEvent {
             for (KeyMapping key : keyMappings) {
                 while (client.player != null && key.consumeClick()) {
                     if (key.getName().equals("key.elytraswapplus.swap")) {
-                        TotemFinderUtil.performManualTotemSwap(Minecraft.getInstance());
+                        TotemFinderUtil.performManualOffhandSwap(Minecraft.getInstance());
                     }
                     if (key.getName().equals("key.elytraswapplus.auto_swap")) {
                         TotemFinderUtil.toggleAutoEquip();
-                        TotemFinderUtil.setAutoEquip(TotemFinderUtil.auto_equip);
 
                         Component message = Component.translatable(
                                 "msg.elytraswapplus.auto_swap." + (TotemFinderUtil.auto_equip ? "enabled" : "disabled")

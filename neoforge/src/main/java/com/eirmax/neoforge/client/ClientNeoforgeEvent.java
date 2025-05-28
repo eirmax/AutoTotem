@@ -14,20 +14,22 @@ import net.neoforged.neoforge.common.util.Lazy;
 public class ClientNeoforgeEvent {
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
-        for (Lazy<KeyMapping> key : ClientNeoforgeKeybindEvent.keyMappings) {
-            while (Minecraft.getInstance().player != null && key.get().consumeClick()) {
-                if (key.get().getName().equals("key.elytraswapplus.swap")) {
-                    TotemFinderUtil.performManualTotemSwap(Minecraft.getInstance());
+        Minecraft minecraft = Minecraft.getInstance();
+
+        for (Lazy<KeyMapping> keyLazy : ClientNeoforgeKeybindEvent.keyMappings) {
+            KeyMapping key = keyLazy.get();
+            while (minecraft.player != null && key.consumeClick()) {
+                if (key.getName().equals("key.elytraswapplus.swap")) {
+                    TotemFinderUtil.performManualOffhandSwap(minecraft);
                 }
-                if (key.get().getName().equals("key.elytraswapplus.auto_swap")) {
+                if (key.getName().equals("key.elytraswapplus.auto_swap")) {
                     TotemFinderUtil.toggleAutoEquip();
-                    TotemFinderUtil.setAutoEquip(TotemFinderUtil.auto_equip);
 
                     Component message = Component.translatable(
-                            "msg.elytraswapplus.auto_swap." + (TotemFinderUtil.auto_equip ? "enabled" : "disabled")
+                            "msg.elytraswapperplus.auto_swap." + (TotemFinderUtil.auto_equip ? "enabled" : "disabled")
                     );
-                    if (Minecraft.getInstance().player != null) {
-                        Minecraft.getInstance().player.displayClientMessage(message, true);
+                    if (minecraft.player != null) {
+                        minecraft.player.displayClientMessage(message, true);
                     }
                 }
             }
