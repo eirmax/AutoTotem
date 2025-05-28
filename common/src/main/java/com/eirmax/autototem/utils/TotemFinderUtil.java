@@ -34,7 +34,6 @@ public class TotemFinderUtil {
                 }
             }
         }
-
         return totemSlots;
     }
 
@@ -46,52 +45,23 @@ public class TotemFinderUtil {
         return totemSlots.get(0);
     }
 
-
-
-    public static void swap(int slotInInventory, Minecraft client) {
+    public static void swapIntoOffhand(int sourceSlotIndex, Minecraft client) {
         if (client.gameMode == null || client.player == null || client.player.containerMenu == null) {
             return;
         }
 
-        int guiSlotSource = slotInInventory;
+        int guiSlotSource = sourceSlotIndex;
 
         if (guiSlotSource == 40) {
             guiSlotSource = 45;
         } else if (guiSlotSource >= 0 && guiSlotSource <= 8) {
             guiSlotSource += 36;
         }
+
+
         int guiSlotTarget = 45;
-        try {
-            client.gameMode.handleInventoryMouseClick(
-                    client.player.containerMenu.containerId, guiSlotSource, 0, ClickType.PICKUP, client.player
-            );
-            client.gameMode.handleInventoryMouseClick(
-                    client.player.containerMenu.containerId, guiSlotTarget, 0, ClickType.PICKUP, client.player
-            );
-            client.gameMode.handleInventoryMouseClick(
-                    client.player.containerMenu.containerId, guiSlotSource, 0, ClickType.PICKUP, client.player
-            );
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
-        }
-    }
 
-    public static void swapToMainHand(int slotInInventory, Minecraft client) {
-        if (client.gameMode == null || client.player == null || client.player.containerMenu == null) {
-            return;
-        }
-
-        int guiSlotSource = slotInInventory;
-
-        if (guiSlotSource == 40) {
-            guiSlotSource = 45;
-        } else if (guiSlotSource >= 0 && guiSlotSource <= 8) {
-            guiSlotSource += 36;
-        }
-
-        int guiSlotTarget = 36;
-
-        if (slotInInventory == 0) {
+        if (sourceSlotIndex == 40) {
             return;
         }
 
@@ -109,45 +79,33 @@ public class TotemFinderUtil {
             ex.printStackTrace();
         }
     }
-
-    public static void tryEquipTotemItemOffhand(Minecraft client){
+    public static void automaticallyReplenishOffhandTotem(Minecraft client){
         if(!auto_equip || client.player == null || client.player.isDeadOrDying()){
             return;
         }
+
         ItemStack offhandItem = client.player.getInventory().getItem(40);
 
         if(!isTotem(offhandItem) || offhandItem.isEmpty()){
-            int totemslot = getBestTotemSlot(client);
-            if(totemslot != -1){
-                swap(totemslot, client);
+            int totemSlotInInventory = getBestTotemSlot(client);
+
+            if(totemSlotInInventory != -1){
+                swapIntoOffhand(totemSlotInInventory, client);
             }
         }
     }
 
-    public static void tryEquipTotemInMainHand(Minecraft client){
-        if(!auto_equip || client.player == null || client.player.isDeadOrDying()){
-            return;
-        }
-        ItemStack mainHandItem = client.player.getMainHandItem();
-        if(!isTotem(mainHandItem)){
-            int totemslot = getBestTotemSlot(client);
-
-            if(totemslot != -1){
-                swapToMainHand(totemslot, client);
-            }
-        }
-    }
-
-    public static void performManualTotemSwap(Minecraft client) {
+    public static void performManualOffhandSwap(Minecraft client) {
         if (client.player == null || client.player.isDeadOrDying()) {
             return;
         }
 
-        int totemSlot = getBestTotemSlot(client);
+        int totemSlotInInventory = getBestTotemSlot(client);
 
-        if (totemSlot != -1) {
-            swapToMainHand(totemSlot, client);
+        if (totemSlotInInventory != -1) {
+            swapIntoOffhand(totemSlotInInventory, client);
         }
     }
-
 }
+
+
